@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springsecuritydemo.mapper.MenuMapper">
+    <resultMap id="MenuResultMap" type="com.example.springsecuritydemo.po.Menu">
+        <id property="id" column="id"/>
+        <result property="pattern" column="pattern"></result>
+        <collection property="roles" ofType="com.example.springsecuritydemo.po.Role">
+            <id column="rid" property="id"/>
+            <result column="rname" property="name"/>
+            <result column="rnameZh" property="nameZh"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAllMenu" resultMap="MenuResultMap">
+        select m.*, r.id as rid, r.name as rname, r.name_zh as rnameZh
+        from test_menu m
+                 left join test_menu_role mr on m.id = mr.mid
+                 left join t_role r on r.id = mr.rid
+    </select>
+</mapper>

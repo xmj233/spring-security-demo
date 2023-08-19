@@ -73,7 +73,7 @@ public class User implements UserDetails {
         if (CollectionUtils.isEmpty(roles)) {
             return new ArrayList<>();
         }
-        return this.roles.stream().map(v -> new SimpleGrantedAuthority(v.getNameZh())).collect(Collectors.toList());
+        return this.roles.stream().map(v -> new SimpleGrantedAuthority(v.getName())).collect(Collectors.toList());
     }
 
     @Override
